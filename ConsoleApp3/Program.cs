@@ -5,70 +5,57 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp3
+namespace TemplateHashCode2020
 {
     class Program
     {
+        private static int counter = 0;
         static void Main(string[] args)
         {
-            var path = @"C:\Users\consta\Desktop\PizzaOrder\c_medium.in";
+            var inputPaths = new List<string>
+            {
+                @"C:\Users\consta\Desktop\PizzaOrder\c_medium.in",
+                @"C:\Users\consta\Desktop\PizzaOrder\e_also_big.in",
+                @"C:\Users\consta\Desktop\PizzaOrder\d_quite_big.in",
+                @"",
+            };
 
-            var hubInstance = ReadInputFile(path);
-            var pizzaOrder = new PizzaOrder();
-            var algoGreedyShort = new DummyAlgorithm(pizzaOrder);
-            algoGreedyShort.OptimizeRides(hubInstance);
-            var score = ComputeScore(pizzaOrder, hubInstance);
-            Console.Out.WriteLine(score);
-            WriteOutputResult(pizzaOrder, @"C:\Users\consta\Desktop\PizzaOrder\ResultTestMedium.csv");
+            var path = inputPaths[2];
+
+            var problemInstance = IOHelper.ReadInputFile(path);
+            var greedyAlgo = new GreedyAlgorithm(problemInstance);
+            var bestSolution = greedyAlgo.Optimize(problemInstance);
+            //var bestSolution = IOHelper.ReadPreviousSolution(@"path");
+            var bestScore = Scorer.ComputeScore(bestSolution, problemInstance);
+
+            Console.Out.WriteLine($"the first score for the given input is {bestScore}");
+            var outputPath = Path.Combine(Path.GetDirectoryName(path),
+                Path.GetFileNameWithoutExtension(path) + "Result.csv");
+            IOHelper.WriteOutputResult(bestSolution, outputPath);
+
+            while (ContinueSolutionImprovemnt())
+            {
+                var improvementAlgorithm = new SolutionImprover(problemInstance, bestSolution);
+                var newSolution = improvementAlgorithm.ImproveAlgorithm();
+                var newScore = Scorer.ComputeScore(newSolution, problemInstance);
+                if (newScore > bestScore)
+                {
+                    bestSolution = newSolution;
+                    bestScore = newScore;
+                    Console.Out.WriteLine($"the new best score for the given input is {bestScore}");
+                    IOHelper.WriteOutputResult(bestSolution, outputPath);
+                }
+            }
+
+            Console.Out.WriteLine($"Computation finshed, press enter for exit");
             Console.In.Read();
         }
 
-        public static int ComputeScore(PizzaOrder po, HubInstance hub)
+        static bool ContinueSolutionImprovemnt()
         {
-            var total = po.PizzaToOrderId.Sum(l => hub.TypesOfPizzas[l].NumberOfSlices);
-            return total > hub.MaximumSlices ? 0 : total;
-        }
-
-        public static HubInstance ReadInputFile(string path)
-        {
-            using (StreamReader sr = File.OpenText(path))
-            {
-
-                var hub = new HubInstance();
-                var firstLine = sr.ReadLine().Split(' ');
-
-                hub.MaximumSlices = int.Parse(firstLine.First());
-                hub.NumberOfPizzas = int.Parse(firstLine.Last());
-                var secondLine = sr.ReadLine().Split(' ');
-                var counter = 0;
-                hub.TypesOfPizzas = secondLine.Select( l=>
-                {
-                    var result = new Pizza();
-                    result.NumberOfSlices = int.Parse(l);
-                    result.Id = counter;
-                    counter++;
-                    return result;
-                }).ToList();
-
-
-                //while ((s = sr.ReadLine()) != null)
-                //{
-                //}
-
-                return hub;
-            }
-        }
-        public static void WriteOutputResult(PizzaOrder f, string outputPath)
-        {
-            using (var w = new StreamWriter(outputPath))
-            {
-                // first line
-                w.WriteLine(f.NumberOfPizzas);
-                w.WriteLine(string.Join(" ", f.PizzaToOrderId));
-                w.Flush();
-
-            }
-
+            counter++;
+            if (counter < 1000) return true;
+            return false;
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace ConsoleApp3
+namespace TemplateHashCode2020
 {
-    public class HubInstance
+    public class ProblemInstance
     {
         public int MaximumSlices { get; set; }
         public int NumberOfPizzas { get; set; }

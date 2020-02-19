@@ -43,11 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DummyAlgorithm.cs" />
-    <Compile Include="HubInstance.cs" />
-    <Compile Include="PizzaOrder.cs" />
+    <Compile Include="GreedyAlgorithm.cs" />
+    <Compile Include="ProblemInstance.cs" />
+    <Compile Include="IOHelper.cs" />
+    <Compile Include="SolutionInstance.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scorer.cs" />
+    <Compile Include="SolutionImprover.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
