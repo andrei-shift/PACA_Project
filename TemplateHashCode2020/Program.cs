@@ -24,7 +24,7 @@ namespace TemplateHashCode2020
 
             var problemInstance = IOHelper.ReadInputFile(path);
             var greedyAlgo = new GreedyAlgorithm(problemInstance);
-            var bestSolution = greedyAlgo.Optimize(problemInstance);
+            var bestSolution = greedyAlgo.Optimize();
             //var bestSolution = IOHelper.ReadPreviousSolution(@"path");
             var bestScore = Scorer.ComputeScore(bestSolution, problemInstance);
 

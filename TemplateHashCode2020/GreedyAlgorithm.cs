@@ -10,14 +10,14 @@ namespace TemplateHashCode2020
             Problem = problem;
         }
 
-        public SolutionInstance Optimize(ProblemInstance problem)
+        public SolutionInstance Optimize()
         {
             var solution = new SolutionInstance();
             var sum = 0;
-            var pOrderSlice = problem.TypesOfPizzas.OrderByDescending(p => p.NumberOfSlices);
+            var pOrderSlice = Problem.TypesOfPizzas.OrderByDescending(p => p.NumberOfSlices);
             foreach (var p in pOrderSlice)
             {
-                if (sum + p.NumberOfSlices < problem.MaximumSlices)
+                if (sum + p.NumberOfSlices < Problem.MaximumSlices)
                 {
                     sum += p.NumberOfSlices;
                     solution.PizzaToOrderId.Add(p.Id);
