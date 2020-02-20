@@ -53,15 +53,15 @@ namespace TemplateHashCode2020
             using (StreamReader sr = File.OpenText(path))
             {
 
-                var pizza = new SolutionInstance();
+                var solution = new SolutionInstance();
                 var firstLine = sr.ReadLine().Split(' ');
-
+                //solution.NumberOfLibraries = int.Parse(firstLine[0]);
 
                 //while ((s = sr.ReadLine()) != null)
                 //{
                 //}
 
-                return pizza;
+                return solution;
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TemplateHashCode2020
 {
@@ -23,6 +24,16 @@ namespace TemplateHashCode2020
         public int Id { get; set; }
         public int Value { get; set; }
 
+        public override bool Equals(Object obj)
+        {
+            return Id == ((Library)obj).Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id;
+        }
+
     }
     public class Library
     {
@@ -31,6 +42,16 @@ namespace TemplateHashCode2020
         public int TimeToSignUp { get; set; }
         public int ShippingCapacity { get; set; }
         public List<int> BooksId { get; set; }
+
+        public override bool Equals(Object obj)
+        {
+            return Id == ((Library)obj).Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id;
+        }
 
     }
 }
