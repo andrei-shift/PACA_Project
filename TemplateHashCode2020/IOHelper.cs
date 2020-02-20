@@ -40,7 +40,12 @@ namespace TemplateHashCode2020
                     libC++;
 
                     var sBis = sr.ReadLine().Split(' ');
-                    library.BooksId = sBis.Select(ll => { return int.Parse(ll); }).ToList();
+
+                    foreach (var book in sBis.Select(int.Parse))
+                    {
+                        library.BooksId.Add(book);
+                    }
+
                     hub.Libraries.Add(library);
                 }
 

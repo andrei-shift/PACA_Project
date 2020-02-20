@@ -30,7 +30,7 @@ namespace TemplateHashCode2020
         public int NumberOfBooks { get; set; }
         public int TimeToSignUp { get; set; }
         public int ShippingCapacity { get; set; }
-        public List<int> BooksId { get; set; }
+        public HashSet<int> BooksId { get; set; }
 
     }
 }
