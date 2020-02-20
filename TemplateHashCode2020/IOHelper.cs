@@ -70,7 +70,10 @@ namespace TemplateHashCode2020
                     var l = s.Split(' ');
                     solution.SignUpLibraryList.Add(pb.Libraries[int.Parse(l[0])]);
                     var newL = sr.ReadLine().Split(' ');
-                    solution.ShippingOrders.Add(int.Parse(l[0]), newL.Select(ll => int.Parse(ll)).ToList());
+                    if (newL.First() != "")
+                    {
+                        solution.ShippingOrders.Add(int.Parse(l[0]), newL.Select(ll => int.Parse(ll)).ToList());
+                    }
                 }
 
                 return solution;
@@ -83,9 +86,13 @@ namespace TemplateHashCode2020
             using (var w = new StreamWriter(outputPath))
             {
                 // first line
-                w.WriteLine(f.NumberOfLibraries);
 
-                foreach (var lib in f.SignUpLibraryList)
+                var usefullLibraries = f.SignUpLibraryList.Where(lib =>
+                    f.ShippingOrders.ContainsKey(lib.Id)).ToList();
+                w.WriteLine(usefullLibraries.Count);
+
+
+                foreach (var lib in usefullLibraries)
                 {
                     w.WriteLine(lib.Id + " " +lib.BooksId.Count);
                     w.WriteLine(string.Join(" ", lib.BooksId));
