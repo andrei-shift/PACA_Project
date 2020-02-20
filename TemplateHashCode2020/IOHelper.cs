@@ -40,7 +40,12 @@ namespace TemplateHashCode2020
                     libC++;
 
                     var sBis = sr.ReadLine().Split(' ');
-                    library.BooksId = sBis.Select(ll => { return int.Parse(ll); }).ToList();
+
+                    foreach (var book in sBis.Select(int.Parse))
+                    {
+                        library.BooksId.Add(book);
+                    }
+
                     hub.Libraries.Add(library);
                 }
 
@@ -53,15 +58,15 @@ namespace TemplateHashCode2020
             using (StreamReader sr = File.OpenText(path))
             {
 
-                var pizza = new SolutionInstance();
+                var solution = new SolutionInstance();
                 var firstLine = sr.ReadLine().Split(' ');
-
+                //solution.NumberOfLibraries = int.Parse(firstLine[0]);
 
                 //while ((s = sr.ReadLine()) != null)
                 //{
                 //}
 
-                return pizza;
+                return solution;
             }
         }
 
