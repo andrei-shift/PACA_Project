@@ -15,7 +15,7 @@ namespace TemplateHashCode2020
 			Problem = problem;
 		}
 
-		public SolutionInstance Optimize()
+		public SolutionInstance Optimize(int batchSize)
 		{
 			var solution = new SolutionInstance();
 			var sum = 0;
@@ -28,18 +28,21 @@ namespace TemplateHashCode2020
 			while (time < Problem.NumberOfDays && availableLibraries.Count != 0)
 			{
 				var pOrderLibrary = availableLibraries.OrderByDescending(lib => LibraryScore(lib, time, doneLibraries, doneBooks));
-				var selectedLib = pOrderLibrary.First();
-				doneLibraries.Add(selectedLib);
-				availableLibraries.Remove(selectedLib);
-				output.Add(selectedLib);
-				shippingOrder[selectedLib.Id] =
-					selectedLib.BooksId.OrderByDescending(bookId => BookScore(bookId, doneBooks)).ToList();
-				time += selectedLib.TimeToSignUp;
-				foreach (var id in selectedLib.BooksId)
-				{
-					doneBooks.Add(id);
-				}
-				Console.WriteLine($"{time}  {Problem.NumberOfDays}");
+
+                foreach (var selectedLib in pOrderLibrary.Take(batchSize))
+                {
+                    doneLibraries.Add(selectedLib);
+                    availableLibraries.Remove(selectedLib);
+                    output.Add(selectedLib);
+                    shippingOrder[selectedLib.Id] =
+                        selectedLib.BooksId.OrderByDescending(bookId => BookScore(bookId, doneBooks)).ToList();
+                    time += selectedLib.TimeToSignUp;
+                    foreach (var id in selectedLib.BooksId)
+                    {
+                        doneBooks.Add(id);
+                    }
+                    Console.WriteLine($"{time}  {Problem.NumberOfDays}");
+                }
 			}
 			solution.SignUpLibraryList = output;
 			solution.ShippingOrders = shippingOrder;

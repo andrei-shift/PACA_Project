@@ -14,16 +14,17 @@ namespace TemplateHashCode2020
 		{
 			var inputPaths = new List<string>
 			{
-				@"C:\Git\input_hashcode\b_read_on.txt",
-				@"C:\Git\input_hashcode\a_example.txt",
-				@"C:\Git\input_hashcode\c_incunabula.txt",
+                @"C:\Users\barnec\Desktop\Instances\d_tough_choices.txt",
+                @"C:\Users\barnec\Desktop\Instances\b_read_on.txt",
 			};
 
-			var path = inputPaths[2];
+			var path = inputPaths[0];
+            var batchSize = 1;
 
-			var problemInstance = IOHelper.ReadInputFile(path);
+            var problemInstance = IOHelper.ReadInputFile(path);
 			var greedyAlgo = new GreedyAlgorithm(problemInstance);
-			var bestSolution = greedyAlgo.Optimize();
+
+            var bestSolution = greedyAlgo.Optimize(batchSize: batchSize);
 			//var bestSolution = IOHelper.ReadPreviousSolution(@"path");
 			var bestScore = Scorer.ComputeScore(bestSolution, problemInstance);
 
