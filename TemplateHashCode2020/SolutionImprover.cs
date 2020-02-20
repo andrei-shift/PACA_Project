@@ -21,25 +21,25 @@ namespace TemplateHashCode2020
         public SolutionInstance ImproveAlgorithm()
         {
             var newSolution = PreviousSolution;
-            PreviousSolution.PizzaToOrderId.ForEach(l => ChosenPizzas.Add(l));
-            var previousScore = Scorer.ComputeScore(PreviousSolution, Problem);
-            Random random = new Random();
+            //PreviousSolution.SignUpLibraryList.ForEach(l => ChosenPizzas.Add(l));
+            //var previousScore = Scorer.ComputeScore(PreviousSolution, Problem);
+            //Random random = new Random();
 
-            while (Scorer.ComputeScore(newSolution, Problem) > previousScore * 0.97)
-            {
-                newSolution.PizzaToOrderId.RemoveAt(random.Next(newSolution.NumberOfPizzas));
-            }
+            //while (Scorer.ComputeScore(newSolution, Problem) > previousScore * 0.97)
+            //{
+            //    newSolution.SignUpLibraryList.RemoveAt(random.Next(newSolution.NumberOfBooks));
+            //}
 
-            var pOrderSlice = Problem.TypesOfPizzas.Where(l => !ChosenPizzas.Contains(l.Id)).OrderBy(p => p.NumberOfSlices);
-            var sum = Scorer.ComputeScore(newSolution, Problem);
-            foreach (var p in pOrderSlice)
-            {
-                if (sum + p.NumberOfSlices < Problem.MaximumSlices)
-                {
-                    sum += p.NumberOfSlices;
-                    newSolution.PizzaToOrderId.Add(p.Id);
-                }
-            }
+            //var pOrderSlice = Problem.Books.Where(l => !ChosenPizzas.Contains(l.Id)).OrderBy(p => p.NumberOfSlices);
+            //var sum = Scorer.ComputeScore(newSolution, Problem);
+            //foreach (var p in pOrderSlice)
+            //{
+            //    if (sum + p.NumberOfSlices < Problem.MaximumSlices)
+            //    {
+            //        sum += p.NumberOfSlices;
+            //        newSolution.SignUpLibraryList.Add(p.Id);
+            //    }
+            //}
 
             return newSolution;
         }

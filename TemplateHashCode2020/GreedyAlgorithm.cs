@@ -14,15 +14,15 @@ namespace TemplateHashCode2020
         {
             var solution = new SolutionInstance();
             var sum = 0;
-            var pOrderSlice = Problem.TypesOfPizzas.OrderByDescending(p => p.NumberOfSlices);
-            foreach (var p in pOrderSlice)
-            {
-                if (sum + p.NumberOfSlices < Problem.MaximumSlices)
-                {
-                    sum += p.NumberOfSlices;
-                    solution.PizzaToOrderId.Add(p.Id);
-                }
-            }
+            //var pOrderSlice = Problem.Books.OrderByDescending(p => p.NumberOfSlices);
+            //foreach (var p in pOrderSlice)
+            //{
+            //    if (sum + p.NumberOfSlices < Problem.MaximumSlices)
+            //    {
+            //        sum += p.NumberOfSlices;
+            //        solution.SignUpLibraryList.Add(p.Id);
+            //    }
+            //}
 
             return solution;
         }

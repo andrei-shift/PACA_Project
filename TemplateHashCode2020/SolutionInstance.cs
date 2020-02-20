@@ -4,14 +4,15 @@ namespace TemplateHashCode2020
 {
     public class SolutionInstance
     {
-        public int NumberOfPizzas => PizzaToOrderId.Count;
+        public int NumberOfBooks => SignUpLibraryList.Count;
 
-        public List<int> PizzaToOrderId { get; set; }
+        public List<Library> SignUpLibraryList { get; set; }
+        public Dictionary<int, List<int>> ShippingOrders { get; set; }
 
         public SolutionInstance()
         {
-            PizzaToOrderId = new List<int>();
         }
         
     }
+
 }
