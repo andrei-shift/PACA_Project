@@ -14,18 +14,19 @@ namespace TemplateHashCode2020
 		{
 			var inputPaths = new List<string>
 			{
-				@"C:\Git\input_hashcode\b_read_on.txt",
+				@"C:\Git\input_hashcode\e_so_many_books.txt",
+				@"C:\Git\input_hashcode\c_incunabula.txt",
+				@"C:\Git\input_hashcode\f_libraries_of_the_world.txt",
 				@"C:\Git\input_hashcode\a_example.txt",
 				@"C:\Git\input_hashcode\b_read_on.txt",
-				@"C:\Git\input_hashcode\c_incunabula.txt",
 			};
 
 			var path = inputPaths[0];
 
 			var problemInstance = IOHelper.ReadInputFile(path);
 			var greedyAlgo = new GreedyAlgorithm(problemInstance);
-			var bestSolution = greedyAlgo.Optimize();
-			//var bestSolution = IOHelper.ReadPreviousSolution(@"C:\Git\input_hashcode\a_exampleResult.csv", problemInstance);
+			//var bestSolution = greedyAlgo.Optimize();
+			var bestSolution = IOHelper.ReadPreviousSolution(@"C:\Git\input_hashcode\e_so_many_booksResult.csv", problemInstance);
 			var bestScore = Scorer.ComputeScore(bestSolution, problemInstance);
 
 			Console.Out.WriteLine($"the first score for the given input is {bestScore}");

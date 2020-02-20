@@ -81,7 +81,8 @@ namespace TemplateHashCode2020
 			var A = Math.Min(((double)numberOfBooksCanAnalyze(lib, time)), libBooks.Count);
 			var B = libBooks.Sum(b => Problem.Books[b].Value);
 			var C = 1 / Math.Log(lib.TimeToSignUp);
-			return A * B * C;
+			var D = 0.2 + ((time + lib.TimeToSignUp) - Problem.NumberOfDays) * (((time + lib.TimeToSignUp) - Problem.NumberOfDays));
+			return A * B * C * D;
 		}
 
 
