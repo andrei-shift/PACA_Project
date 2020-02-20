@@ -14,8 +14,10 @@ namespace TemplateHashCode2020
 		{
 			var inputPaths = new List<string>
 			{
-                @"C:\Users\barnec\Desktop\Instances\d_tough_choices.txt",
-                @"C:\Users\barnec\Desktop\Instances\b_read_on.txt",
+				@"C:\Git\input_hashcode\b_read_on.txt",
+				@"C:\Git\input_hashcode\a_example.txt",
+				@"C:\Git\input_hashcode\b_read_on.txt",
+				@"C:\Git\input_hashcode\c_incunabula.txt",
 			};
 
 			var path = inputPaths[0];
