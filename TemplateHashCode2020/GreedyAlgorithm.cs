@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Security.Policy;
@@ -33,6 +34,9 @@ namespace TemplateHashCode2020
 				var doneBooks = new HashSet<int>(doneLibraries.SelectMany(lib => lib.BooksId));
 				shippingOrder[selectedLib.Id] =
 					selectedLib.BooksId.OrderByDescending(bookId => BookScore(bookId, doneBooks)).ToList();
+				time += selectedLib.TimeToSignUp;
+
+				Console.WriteLine($"{time}  {Problem.NumberOfDays}");
 			}
 			solution.SignUpLibraryList = output;
 			solution.ShippingOrders = shippingOrder;
