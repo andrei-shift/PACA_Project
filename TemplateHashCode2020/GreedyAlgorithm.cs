@@ -37,21 +37,21 @@ namespace TemplateHashCode2020
 			{
 				var pOrderLibrary = availableLibraries.OrderByDescending(lib => LibraryScore(lib, time, doneLibraries, doneBooks));
 
-                foreach (var selectedLib in pOrderLibrary.Take(batchSize))
-                {
-                    doneLibraries.Add(selectedLib);
-                    availableLibraries.Remove(selectedLib);
-                    output.Add(selectedLib);
-				    shippingOrder[selectedLib.Id] = fuseBooks(
+				foreach (var selectedLib in pOrderLibrary.Take(batchSize))
+				{
+					doneLibraries.Add(selectedLib);
+					availableLibraries.Remove(selectedLib);
+					output.Add(selectedLib);
+					shippingOrder[selectedLib.Id] = fuseBooks(
 					selectedLib.BooksId.OrderByDescending(bookId => Problem.Books[bookId].Value).ToList(), copyBooksInLibrary[selectedLib.Id]);
-                    time += selectedLib.TimeToSignUp;
-                    foreach (var id in selectedLib.BooksId)
-				//foreach (var id in selectedLib.BooksId.OrderByDescending(b => Problem.Books[b].Value).Take(numberOfBooksCanAnalyze(selectedLib,time)))
-                    {
-                        doneBooks.Add(id);
-                    }
-                    Console.WriteLine($"{time}  {Problem.NumberOfDays}");
-                }
+					time += selectedLib.TimeToSignUp;
+					foreach (var id in selectedLib.BooksId)
+					//foreach (var id in selectedLib.BooksId.OrderByDescending(b => Problem.Books[b].Value).Take(numberOfBooksCanAnalyze(selectedLib,time)))
+					{
+						doneBooks.Add(id);
+					}
+					Console.WriteLine($"{time}  {Problem.NumberOfDays}");
+				}
 			}
 			solution.SignUpLibraryList = output;
 			solution.ShippingOrders = shippingOrder;
@@ -81,11 +81,11 @@ namespace TemplateHashCode2020
 		{
 			var libBooks = lib.BooksId;
 			libBooks.ExceptWith(alreadyBooks);
-            var estimatedNumberOfAvailableBooks = libBooks.Count > 100 ? libBooks.Count : lib.NumberOfBooks;
-            var A = Math.Min(((double)numberOfBooksCanAnalyze(lib, time)), estimatedNumberOfAvailableBooks);
+			var estimatedNumberOfAvailableBooks = libBooks.Count > 100 ? libBooks.Count : lib.NumberOfBooks;
+			var A = Math.Min(((double)numberOfBooksCanAnalyze(lib, time)), estimatedNumberOfAvailableBooks);
 			var B = libBooks.Sum(b => Problem.Books[b].Value);
 			var C = 1 / Math.Log(lib.TimeToSignUp);
-			var D = 0.2 + ((time + lib.TimeToSignUp) - Problem.NumberOfDays) * (((time + lib.TimeToSignUp) - Problem.NumberOfDays));
+			var D = 0.01 + ((time + lib.TimeToSignUp) - Problem.NumberOfDays) * (((time + lib.TimeToSignUp) - Problem.NumberOfDays));
 			return A * B * C * D;
 		}
 
