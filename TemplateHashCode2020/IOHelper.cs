@@ -29,7 +29,7 @@ namespace TemplateHashCode2020
 
                 var libC = 0;
                 string s;
-                while ((s = sr.ReadLine()) != null)
+                while ((s = sr.ReadLine()) != null && s != "")
                 {
                     var splittedL = s.Split(' ');
                     var library = new Library();
@@ -41,6 +41,7 @@ namespace TemplateHashCode2020
 
                     var sBis = sr.ReadLine().Split(' ');
                     library.BooksId = sBis.Select(ll => { return int.Parse(ll); }).ToList();
+                    hub.Libraries.Add(library);
                 }
 
                 return hub;

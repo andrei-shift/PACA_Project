@@ -16,9 +16,10 @@ namespace TemplateHashCode2020
             {
                 @"C:\Users\consta\Desktop\LibraryProblem\b_read_on.txt",
                 @"C:\Users\consta\Desktop\LibraryProblem\a_example.txt",
+                @"C:\Users\consta\Desktop\LibraryProblem\c_incunabula.txt",
             };
 
-            var path = inputPaths[1];
+            var path = inputPaths[2];
 
             var problemInstance = IOHelper.ReadInputFile(path);
             var greedyAlgo = new GreedyAlgorithm(problemInstance);
