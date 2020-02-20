@@ -35,11 +35,14 @@ namespace TemplateHashCode2020
             foreach (var library in po.SignUpLibraryList)
             {
                 var libraryId = library.Id;
-                var effectiveLibraryCapacity = library.ShippingCapacity * effectiveLibraryTimes[libraryId];
-
-                foreach (var book in po.ShippingOrders[libraryId].Take(effectiveLibraryCapacity))
+                if (effectiveLibraryTimes.ContainsKey(libraryId))
                 {
-                    bookIdsScanned.Add(book);
+                    var effectiveLibraryCapacity = library.ShippingCapacity * effectiveLibraryTimes[libraryId];
+
+                    foreach (var book in po.ShippingOrders[libraryId].Take(effectiveLibraryCapacity))
+                    {
+                        bookIdsScanned.Add(book);
+                    }
                 }
             }
 
