@@ -24,6 +24,7 @@ namespace TemplateHashCode2020
 			HashSet<Library> availableLibraries = new HashSet<Library>(Problem.Libraries);
 			var doneBooks = new HashSet<int>();
 			List<Library> output = new List<Library>();
+
 			Dictionary<int, List<int>> shippingOrder = new Dictionary<int, List<int>>();
 			while (time < Problem.NumberOfDays && availableLibraries.Count != 0)
 			{
@@ -34,8 +35,7 @@ namespace TemplateHashCode2020
                     doneLibraries.Add(selectedLib);
                     availableLibraries.Remove(selectedLib);
                     output.Add(selectedLib);
-                    shippingOrder[selectedLib.Id] =
-                        selectedLib.BooksId.OrderByDescending(bookId => BookScore(bookId, doneBooks)).ToList();
+				    shippingOrder[selectedLib.Id] = selectedLib.BooksId.OrderByDescending(bookId => Problem.Books[bookId].Value).ToList();
                     time += selectedLib.TimeToSignUp;
                     foreach (var id in selectedLib.BooksId)
                     {
@@ -54,7 +54,7 @@ namespace TemplateHashCode2020
 		{
 			var libBooks = lib.BooksId;
 			libBooks.ExceptWith(alreadyBooks);
-			var A = Math.Min(((double)(Problem.NumberOfDays - time - lib.TimeToSignUp) * lib.ShippingCapacity), libBooks.Count);
+			var A = Math.Min(((double)(Problem.NumberOfDays - time - lib.TimeToSignUp - 1) * lib.ShippingCapacity), libBooks.Count);
 			var B = libBooks.Sum(b => Problem.Books[b].Value);
 			var C = 1 / Math.Log(lib.TimeToSignUp);
 			return A * B * C;
