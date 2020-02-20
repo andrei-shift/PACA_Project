@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace TemplateHashCode2020
@@ -53,18 +54,22 @@ namespace TemplateHashCode2020
             }
         }
 
-        public static SolutionInstance ReadPreviousSolution(string path)
+        public static SolutionInstance ReadPreviousSolution(string path, ProblemInstance pb)
         {
             using (StreamReader sr = File.OpenText(path))
             {
 
                 var solution = new SolutionInstance();
                 var firstLine = sr.ReadLine().Split(' ');
-                //solution.NumberOfLibraries = int.Parse(firstLine[0]);
+                string s;
 
-                //while ((s = sr.ReadLine()) != null)
-                //{
-                //}
+                while ((s = sr.ReadLine()) != null)
+                {
+                    var l = s.Split(' ');
+                    solution.SignUpLibraryList.Add(pb.Libraries[int.Parse(l[0])]);
+                    var newL = sr.ReadLine().Split(' ');
+                    solution.ShippingOrders.Add(int.Parse(l[0]), newL.Select(ll => int.Parse(ll)).ToList());
+                }
 
                 return solution;
             }
