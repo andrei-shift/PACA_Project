@@ -72,9 +72,14 @@ namespace TemplateHashCode2020
             {
                 // first line
                 w.WriteLine(f.NumberOfLibraries);
-                w.WriteLine(string.Join(" ", f.SignUpLibraryList));
-                w.Flush();
 
+                foreach (var lib in f.SignUpLibraryList)
+                {
+                    w.WriteLine(lib.Id + " " +lib.BooksId.Count);
+                    w.WriteLine(string.Join(" ", lib.BooksId));
+                }
+
+                w.Flush();
             }
 
         }
