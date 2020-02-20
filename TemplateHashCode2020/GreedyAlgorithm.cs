@@ -25,7 +25,7 @@ namespace TemplateHashCode2020
 			var doneBooks = new HashSet<int>();
 			List<Library> output = new List<Library>();
 			Dictionary<int, List<int>> shippingOrder = new Dictionary<int, List<int>>();
-			while (time < Problem.NumberOfDays)
+			while (time < Problem.NumberOfDays && availableLibraries.Count != 0)
 			{
 				var pOrderLibrary = availableLibraries.OrderByDescending(lib => LibraryScore(lib, time, doneLibraries));
 				var selectedLib = pOrderLibrary.First();
