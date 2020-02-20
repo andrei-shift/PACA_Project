@@ -81,7 +81,8 @@ namespace TemplateHashCode2020
 		{
 			var libBooks = lib.BooksId;
 			libBooks.ExceptWith(alreadyBooks);
-			var A = Math.Min(((double)numberOfBooksCanAnalyze(lib, time)), libBooks.Count);
+            var estimatedNumberOfAvailableBooks = libBooks.Count > 100 ? libBooks.Count : lib.NumberOfBooks;
+            var A = Math.Min(((double)numberOfBooksCanAnalyze(lib, time)), estimatedNumberOfAvailableBooks);
 			var B = libBooks.Sum(b => Problem.Books[b].Value);
 			var C = 1 / Math.Log(lib.TimeToSignUp);
 			return A * B * C;
