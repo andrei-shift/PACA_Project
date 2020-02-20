@@ -27,7 +27,7 @@ namespace TemplateHashCode2020
 			Dictionary<int, List<int>> shippingOrder = new Dictionary<int, List<int>>();
 			while (time < Problem.NumberOfDays && availableLibraries.Count != 0)
 			{
-				var pOrderLibrary = availableLibraries.OrderByDescending(lib => LibraryScore(lib, time, doneLibraries));
+				var pOrderLibrary = availableLibraries.OrderByDescending(lib => LibraryScore(lib, time, doneLibraries, doneBooks));
 				var selectedLib = pOrderLibrary.First();
 				doneLibraries.Add(selectedLib);
 				availableLibraries.Remove(selectedLib);
@@ -47,10 +47,9 @@ namespace TemplateHashCode2020
 			return solution;
 		}
 
-		public double LibraryScore(Library lib, int time, HashSet<Library> doneLibraries)
+		public double LibraryScore(Library lib, int time, HashSet<Library> doneLibraries, HashSet<int> alreadyBooks)
 		{
-			var libBooks = new HashSet<int>(lib.BooksId);
-			var alreadyBooks = new HashSet<int>(doneLibraries.SelectMany(other => other.BooksId).ToList());
+			var libBooks = lib.BooksId;
 			libBooks.ExceptWith(alreadyBooks);
 			var A = Math.Min(((double)(Problem.NumberOfDays - time - lib.TimeToSignUp) * lib.ShippingCapacity), libBooks.Count);
 			var B = libBooks.Sum(b => Problem.Books[b].Value);
