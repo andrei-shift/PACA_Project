@@ -14,9 +14,13 @@ namespace TemplateHashCode2020
 		{
 			var inputPaths = new List<string>
 			{
+<<<<<<< HEAD
 				@"C:\Git\input_hashcode\e_so_many_books.txt",
 				@"C:\Git\input_hashcode\c_incunabula.txt",
 				@"C:\Git\input_hashcode\f_libraries_of_the_world.txt",
+=======
+                @"C:\Users\barnec\Desktop\Instances\b_read_on.txt",
+>>>>>>> 5f256b220b1ac2bdad2befb99f913a99828fd6cd
 				@"C:\Git\input_hashcode\a_example.txt",
 				@"C:\Git\input_hashcode\b_read_on.txt",
 			};
@@ -28,8 +32,13 @@ namespace TemplateHashCode2020
 
             var problemInstance = IOHelper.ReadInputFile(path);
 			var greedyAlgo = new GreedyAlgorithm(problemInstance);
+<<<<<<< HEAD
+			//var bestSolution = greedyAlgo.Optimize();
+			var bestSolution = IOHelper.ReadPreviousSolution(@"C:\Git\input_hashcode\e_so_many_booksResult.csv", problemInstance);
+=======
 			var bestSolution = greedyAlgo.Optimize(batchSize: batchSize);
 			//var bestSolution = IOHelper.ReadPreviousSolution(@"C:\Git\input_hashcode\a_exampleResult.csv", problemInstance);
+>>>>>>> 5f256b220b1ac2bdad2befb99f913a99828fd6cd
 			var bestScore = Scorer.ComputeScore(bestSolution, problemInstance);
 
 			Console.Out.WriteLine($"the first score for the given input is {bestScore}");
