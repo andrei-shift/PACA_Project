@@ -27,7 +27,7 @@ namespace TemplateHashCode2020
 
             //while (Scorer.ComputeScore(newSolution, Problem) > previousScore * 0.97)
             //{
-            //    newSolution.SignUpLibraryList.RemoveAt(random.Next(newSolution.NumberOfBooks));
+            //    newSolution.SignUpLibraryList.RemoveAt(random.Next(newSolution.NumberOfLibraries));
             //}
 
             //var pOrderSlice = Problem.Books.Where(l => !ChosenPizzas.Contains(l.Id)).OrderBy(p => p.NumberOfSlices);

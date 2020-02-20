@@ -9,27 +9,40 @@ namespace TemplateHashCode2020
         {
             using (StreamReader sr = File.OpenText(path))
             {
-
-                var hub = new ProblemInstance();
                 var firstLine = sr.ReadLine().Split(' ');
 
-                //hub.MaximumSlices = int.Parse(firstLine.First());
-                //hub.NumberOfPizzas = int.Parse(firstLine.Last());
-                //var secondLine = sr.ReadLine().Split(' ');
-                //var counter = 0;
-                //hub.Books = secondLine.Select(l =>
-                //{
-                //    var result = new Book();
-                //    result.NumberOfSlices = int.Parse(l);
-                //    result.Id = counter;
-                //    counter++;
-                //    return result;
-                //}).ToList();
+                var hub = new ProblemInstance();
+                hub.NumberOfBooks = int.Parse(firstLine[0]);
+                hub.NumberOfLibraries = int.Parse(firstLine[1]);
+                hub.NumberOfDays = int.Parse(firstLine[2]);
 
+                var secondLine = sr.ReadLine().Split(' ');
+                var counter = 0;
+                hub.Books = secondLine.Select(l =>
+                {
+                    var result = new Book();
+                    result.Id = counter;
+                    result.Value = int.Parse(l);
+                    counter++;
+                    return result;
+                }).ToList();
 
-                //while ((s = sr.ReadLine()) != null)
-                //{
-                //}
+                var libC = 0;
+                string s;
+                while ((s = sr.ReadLine()) != null && s != "")
+                {
+                    var splittedL = s.Split(' ');
+                    var library = new Library();
+                    library.Id = libC;
+                    library.NumberOfBooks = int.Parse(splittedL[0]);
+                    library.TimeToSignUp = int.Parse(splittedL[1]);
+                    library.ShippingCapacity = int.Parse(splittedL[2]);
+                    libC++;
+
+                    var sBis = sr.ReadLine().Split(' ');
+                    library.BooksId = sBis.Select(ll => { return int.Parse(ll); }).ToList();
+                    hub.Libraries.Add(library);
+                }
 
                 return hub;
             }
@@ -58,10 +71,15 @@ namespace TemplateHashCode2020
             using (var w = new StreamWriter(outputPath))
             {
                 // first line
-                w.WriteLine(f.NumberOfBooks);
-                w.WriteLine(string.Join(" ", f.SignUpLibraryList));
-                w.Flush();
+                w.WriteLine(f.NumberOfLibraries);
 
+                foreach (var lib in f.SignUpLibraryList)
+                {
+                    w.WriteLine(lib.Id + " " +lib.BooksId.Count);
+                    w.WriteLine(string.Join(" ", lib.BooksId));
+                }
+
+                w.Flush();
             }
 
         }
