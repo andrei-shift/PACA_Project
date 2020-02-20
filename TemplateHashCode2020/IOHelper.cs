@@ -60,6 +60,8 @@ namespace TemplateHashCode2020
             {
 
                 var solution = new SolutionInstance();
+                solution.SignUpLibraryList = new List<Library>();
+                solution.ShippingOrders = new Dictionary<int, List<int>>();
                 var firstLine = sr.ReadLine().Split(' ');
                 string s;
 
