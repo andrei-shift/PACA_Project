@@ -14,10 +14,9 @@ namespace TemplateHashCode2020
         {
             var inputPaths = new List<string>
             {
-                @"C:\Users\consta\Desktop\PizzaOrder\c_medium.in",
-                @"C:\Users\consta\Desktop\PizzaOrder\e_also_big.in",
-                @"C:\Users\consta\Desktop\PizzaOrder\d_quite_big.in",
-                @"",
+                @"C:\Users\consta\Desktop\LibraryProblem\b_read_on.txt",
+                @"C:\Users\consta\Desktop\LibraryProblem\a_example.txt",
+                @"C:\Users\consta\Desktop\LibraryProblem\c_incunabula.txt",
             };
 
             var path = inputPaths[2];
