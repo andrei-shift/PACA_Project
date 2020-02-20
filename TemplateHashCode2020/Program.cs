@@ -16,16 +16,18 @@ namespace TemplateHashCode2020
 			{
 				@"C:\Git\input_hashcode\b_read_on.txt",
 				@"C:\Git\input_hashcode\a_example.txt",
+				@"C:\Git\input_hashcode\b_read_on.txt",
 				@"C:\Git\input_hashcode\c_incunabula.txt",
 			};
 
-			var path = inputPaths[1];
+			var path = inputPaths[0];
 
+            var batchSize = 1;
 			var problemInstance = IOHelper.ReadInputFile(path);
 			var greedyAlgo = new GreedyAlgorithm(problemInstance);
-			//var bestSolution = greedyAlgo.Optimize();
-            var bestSolution = IOHelper.ReadPreviousSolution(@"C:\Git\input_hashcode\a_exampleResult.csv", problemInstance);
-            var bestScore = Scorer.ComputeScore(bestSolution, problemInstance);
+			var bestSolution = greedyAlgo.Optimize(batchSize: batchSize);
+			//var bestSolution = IOHelper.ReadPreviousSolution(@"C:\Git\input_hashcode\a_exampleResult.csv", problemInstance);
+			var bestScore = Scorer.ComputeScore(bestSolution, problemInstance);
 
 			Console.Out.WriteLine($"the first score for the given input is {bestScore}");
 			var outputPath = Path.Combine(Path.GetDirectoryName(path),
