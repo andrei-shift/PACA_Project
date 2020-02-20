@@ -14,7 +14,7 @@ namespace TemplateHashCode2020
 		{
 			var inputPaths = new List<string>
 			{
-				@"C:\Git\input_hashcode\b_read_on.txt",
+                @"C:\Users\barnec\Desktop\Instances\b_read_on.txt",
 				@"C:\Git\input_hashcode\a_example.txt",
 				@"C:\Git\input_hashcode\b_read_on.txt",
 				@"C:\Git\input_hashcode\c_incunabula.txt",
@@ -23,7 +23,9 @@ namespace TemplateHashCode2020
 			var path = inputPaths[0];
 
             var batchSize = 1;
-			var problemInstance = IOHelper.ReadInputFile(path);
+            var ImprovementActivated = false;
+
+            var problemInstance = IOHelper.ReadInputFile(path);
 			var greedyAlgo = new GreedyAlgorithm(problemInstance);
 			var bestSolution = greedyAlgo.Optimize(batchSize: batchSize);
 			//var bestSolution = IOHelper.ReadPreviousSolution(@"C:\Git\input_hashcode\a_exampleResult.csv", problemInstance);
@@ -34,7 +36,7 @@ namespace TemplateHashCode2020
 				Path.GetFileNameWithoutExtension(path) + "Result.csv");
 			IOHelper.WriteOutputResult(bestSolution, outputPath);
 
-			while (ContinueSolutionImprovemnt())
+			while (ImprovementActivated && ContinueSolutionImprovemnt())
 			{
 				var improvementAlgorithm = new SolutionImprover(problemInstance, bestSolution);
 				var newSolution = improvementAlgorithm.ImproveAlgorithm();
