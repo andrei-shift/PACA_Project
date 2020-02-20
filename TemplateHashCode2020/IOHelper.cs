@@ -94,8 +94,8 @@ namespace TemplateHashCode2020
 
                 foreach (var lib in usefullLibraries)
                 {
-                    w.WriteLine(lib.Id + " " +lib.BooksId.Count);
-                    w.WriteLine(string.Join(" ", lib.BooksId));
+                    w.WriteLine(lib.Id + " " + f.ShippingOrders[lib.Id].Count);
+                    w.WriteLine(string.Join(" ", f.ShippingOrders[lib.Id]));
                 }
 
                 w.Flush();
