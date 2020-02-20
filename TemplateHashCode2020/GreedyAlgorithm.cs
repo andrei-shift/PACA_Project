@@ -25,6 +25,13 @@ namespace TemplateHashCode2020
 			var doneBooks = new HashSet<int>();
 			List<Library> output = new List<Library>();
 
+			Dictionary<int, List<int>> copyBooksInLibrary =
+				new Dictionary<int, List<int>>();
+			foreach (Library l in availableLibraries)
+			{
+				copyBooksInLibrary[l.Id] = l.BooksId.OrderByDescending(b => Problem.Books[b].Value).ToList();
+			}
+
 			Dictionary<int, List<int>> shippingOrder = new Dictionary<int, List<int>>();
 			while (time < Problem.NumberOfDays && availableLibraries.Count != 0)
 			{
@@ -35,7 +42,8 @@ namespace TemplateHashCode2020
                     doneLibraries.Add(selectedLib);
                     availableLibraries.Remove(selectedLib);
                     output.Add(selectedLib);
-				    shippingOrder[selectedLib.Id] = selectedLib.BooksId.OrderByDescending(bookId => Problem.Books[bookId].Value).ToList();
+				    shippingOrder[selectedLib.Id] = fuseBooks(
+					selectedLib.BooksId.OrderByDescending(bookId => Problem.Books[bookId].Value).ToList(), copyBooksInLibrary[selectedLib.Id]);
                     time += selectedLib.TimeToSignUp;
                     foreach (var id in selectedLib.BooksId)
 				//foreach (var id in selectedLib.BooksId.OrderByDescending(b => Problem.Books[b].Value).Take(numberOfBooksCanAnalyze(selectedLib,time)))
@@ -49,6 +57,19 @@ namespace TemplateHashCode2020
 			solution.ShippingOrders = shippingOrder;
 
 			return solution;
+		}
+
+		public List<int> fuseBooks(List<int> book1, List<int> books2)
+		{
+			foreach (var el in books2)
+			{
+				if (!book1.Contains(el))
+				{
+					book1.Add(el);
+				}
+			}
+
+			return book1;
 		}
 
 		public int numberOfBooksCanAnalyze(Library lib, int time)
