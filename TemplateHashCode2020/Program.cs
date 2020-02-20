@@ -16,6 +16,7 @@ namespace TemplateHashCode2020
 			{
 				@"C:\Git\input_hashcode\b_read_on.txt",
 				@"C:\Git\input_hashcode\a_example.txt",
+				@"C:\Git\input_hashcode\b_read_on.txt",
 				@"C:\Git\input_hashcode\c_incunabula.txt",
 			};
 

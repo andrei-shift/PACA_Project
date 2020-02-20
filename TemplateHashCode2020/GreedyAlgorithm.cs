@@ -37,6 +37,7 @@ namespace TemplateHashCode2020
 					selectedLib.BooksId.OrderByDescending(bookId => Problem.Books[bookId].Value).ToList();
 				time += selectedLib.TimeToSignUp;
 				foreach (var id in selectedLib.BooksId)
+				//foreach (var id in selectedLib.BooksId.OrderByDescending(b => Problem.Books[b].Value).Take(numberOfBooksCanAnalyze(selectedLib,time)))
 				{
 					doneBooks.Add(id);
 				}
@@ -48,15 +49,22 @@ namespace TemplateHashCode2020
 			return solution;
 		}
 
+		public int numberOfBooksCanAnalyze(Library lib, int time)
+		{
+			return (Problem.NumberOfDays - time - lib.TimeToSignUp - 1) * lib.ShippingCapacity;
+		}
+
 		public double LibraryScore(Library lib, int time, HashSet<Library> doneLibraries, HashSet<int> alreadyBooks)
 		{
 			var libBooks = lib.BooksId;
 			libBooks.ExceptWith(alreadyBooks);
-			var A = Math.Min(((double)(Problem.NumberOfDays - time - lib.TimeToSignUp - 1) * lib.ShippingCapacity), libBooks.Count);
+			var A = Math.Min(((double)numberOfBooksCanAnalyze(lib, time)), libBooks.Count);
 			var B = libBooks.Sum(b => Problem.Books[b].Value);
 			var C = 1 / Math.Log(lib.TimeToSignUp);
 			return A * B * C;
 		}
+
+
 
 		public double BookScore(int bookId, HashSet<int> doneBooksIds)
 		{
