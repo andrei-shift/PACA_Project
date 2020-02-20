@@ -14,13 +14,11 @@ namespace TemplateHashCode2020
         {
             var inputPaths = new List<string>
             {
-                @"C:\Users\consta\Desktop\PizzaOrder\c_medium.in",
-                @"C:\Users\consta\Desktop\PizzaOrder\e_also_big.in",
-                @"C:\Users\consta\Desktop\PizzaOrder\d_quite_big.in",
-                @"",
+                @"C:\Users\consta\Desktop\LibraryProblem\b_read_on.txt",
+                @"C:\Users\consta\Desktop\LibraryProblem\a_example.txt",
             };
 
-            var path = inputPaths[2];
+            var path = inputPaths[1];
 
             var problemInstance = IOHelper.ReadInputFile(path);
             var greedyAlgo = new GreedyAlgorithm(problemInstance);
